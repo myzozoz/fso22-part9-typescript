@@ -1,5 +1,6 @@
 import patientData from '../../data/patients.json';
-import { type Patient, type CensoredPatient } from '../types';
+import { v1 as uuid } from 'uuid';
+import { Patient, CensoredPatient, NewPatient } from '../types';
 
 const patients: Array<Patient> = patientData as Patient[];
 
@@ -17,7 +18,36 @@ const getCensored = (): Array<CensoredPatient> => {
   }));
 };
 
+const addNew = ({
+  name,
+  dateOfBirth,
+  ssn,
+  gender,
+  occupation,
+}: NewPatient): CensoredPatient => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  const id: string = uuid();
+  const newPatient: Patient = {
+    id,
+    name,
+    dateOfBirth,
+    ssn,
+    gender,
+    occupation,
+  };
+
+  patients.push(newPatient);
+  return {
+    name,
+    id,
+    dateOfBirth,
+    gender,
+    occupation,
+  };
+};
+
 export default {
   getAll,
   getCensored,
+  addNew,
 };
