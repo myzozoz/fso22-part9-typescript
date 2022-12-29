@@ -1,4 +1,4 @@
-interface Exercise {
+export interface Exercise {
   totalDays: number;
   trainingDays: number;
   target: number;
@@ -8,7 +8,10 @@ interface Exercise {
   description: string;
 }
 
-const calculateExercises = (input: Array<number>, target: number): Exercise => {
+export const calculateExercises = (
+  input: Array<number>,
+  target: number
+): Exercise => {
   const totalHours = input.reduce(
     (prev: number, curr: number) => prev + curr,
     0
@@ -46,6 +49,7 @@ const calculateExercises = (input: Array<number>, target: number): Exercise => {
   };
 };
 
+/*
 const parseArguments = (
   args: Array<string>
 ): { data: Array<number>; target: number } => {
@@ -61,3 +65,4 @@ const parseArguments = (
 
 const { data, target } = parseArguments(process.argv);
 console.log(calculateExercises(data, target));
+*/
