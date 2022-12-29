@@ -13,13 +13,11 @@ const calculateExercises = (input: Array<number>, target: number): Exercise => {
     (prev: number, curr: number) => prev + curr,
     0
   );
-  console.log(`Total: ${totalHours}`);
 
   const trainingDays = input.reduce(
     (prev: number, curr: number) => (curr > 0 ? prev + 1 : prev),
     0
   );
-  console.log(`Total: ${trainingDays}`);
 
   const avg = totalHours / input.length;
 
@@ -48,4 +46,18 @@ const calculateExercises = (input: Array<number>, target: number): Exercise => {
   };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+const parseArguments = (
+  args: Array<string>
+): { data: Array<number>; target: number } => {
+  const target: number = Number(args[2]);
+  const data: Array<number> = [];
+
+  for (let i = 3; i < args.length; i++) {
+    data.push(Number(args[i]));
+  }
+
+  return { data, target };
+};
+
+const { data, target } = parseArguments(process.argv);
+console.log(calculateExercises(data, target));
