@@ -49,7 +49,7 @@ const calculateExercises = (input: Array<number>, target: number): Exercise => {
 const parseArguments = (
   args: Array<string>
 ): { data: Array<number>; target: number } => {
-  const target: number = Number(args[2]);
+  const target = Number(args[2]);
   const data: Array<number> = [];
 
   for (let i = 3; i < args.length; i++) {

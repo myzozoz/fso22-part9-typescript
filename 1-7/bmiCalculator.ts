@@ -8,7 +8,7 @@ export const calculateBmi = (height: number, weight: number): BMI => {
   const heightInM: number = height / 100;
   const bmi = weight / (heightInM * heightInM);
   console.log(`Weight(kg): ${weight}, Height(m): ${heightInM} => BMI: ${bmi}`);
-  let bmi_string: string = "";
+  let bmi_string = "";
   if (bmi < 16.0) bmi_string = "Underweight (Severe thinness)";
   else if (bmi < 17) bmi_string = "Underweight (Moderate thinness)";
   else if (bmi < 18.5) bmi_string = "Underweight (Mild thinness)";
