@@ -24,7 +24,6 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  console.log('params: ', req.params);
   const pat = patients.get(req.params.id);
   if (pat) res.json(pat);
   else res.status(404).send(`Patient with id ${req.params.id} not found`);
