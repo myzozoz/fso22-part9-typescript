@@ -5,11 +5,10 @@ import toNewPatient from '../utils';
 const router = express.Router();
 
 router.get('/', (_req, res) => {
-  res.json(patients.getCensored());
+  res.json(patients.getAllCensored());
 });
 
 router.post('/', (req, res) => {
-  console.log('req body', req.body);
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const newPatient = toNewPatient(req.body);
@@ -22,6 +21,13 @@ router.post('/', (req, res) => {
     }
     res.status(400).send(errorMessage);
   }
+});
+
+router.get('/:id', (req, res) => {
+  console.log('params: ', req.params);
+  const pat = patients.get(req.params.id);
+  if (pat) res.json(pat);
+  else res.status(404).send(`Patient with id ${req.params.id} not found`);
 });
 
 export default router;

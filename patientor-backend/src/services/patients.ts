@@ -1,14 +1,21 @@
 import patientData from '../../data/patients.json';
 import { v1 as uuid } from 'uuid';
-import { Patient, CensoredPatient, NewPatient } from '../types';
+import { Patient, PublicPatient, NewPatient } from '../types';
 
-const patients: Array<Patient> = patientData as Patient[];
+const patients: Array<Patient> = patientData.map((p) => ({
+  ...p,
+  entries: [],
+})) as Patient[];
 
 const getAll = (): Array<Patient> => {
   return patients;
 };
 
-const getCensored = (): Array<CensoredPatient> => {
+const get = (id: string): Patient | undefined => {
+  return patients.find((p) => p.id === id);
+};
+
+const getAllCensored = (): Array<PublicPatient> => {
   return patients.map(({ id, name, dateOfBirth, gender, occupation }) => ({
     id,
     name,
@@ -24,7 +31,7 @@ const addNew = ({
   ssn,
   gender,
   occupation,
-}: NewPatient): CensoredPatient => {
+}: NewPatient): PublicPatient => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const id: string = uuid();
   const newPatient: Patient = {
@@ -34,6 +41,7 @@ const addNew = ({
     ssn,
     gender,
     occupation,
+    entries: [],
   };
 
   patients.push(newPatient);
@@ -48,6 +56,7 @@ const addNew = ({
 
 export default {
   getAll,
-  getCensored,
+  getAllCensored,
+  get,
   addNew,
 };
