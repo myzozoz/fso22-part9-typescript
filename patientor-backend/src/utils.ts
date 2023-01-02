@@ -72,7 +72,7 @@ const isStringArray = (arr: unknown[]): arr is string[] => {
 };
 
 const parseHealthCheckRating = (hcr: unknown): HealthCheckRating => {
-  if (!hcr || !isHCR(hcr)) {
+  if (hcr === undefined || hcr === null || !isHCR(hcr)) {
     throw new Error('Incorrect or missing field: healthCheckRating');
   }
   return hcr;
